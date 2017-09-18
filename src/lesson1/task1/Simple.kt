@@ -75,8 +75,12 @@ fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double {
  * Пользователь задает угол в градусах, минутах и секундах (например, 36 градусов 14 минут 35 секунд).
  * Вывести значение того же угла в радианах (например, 0.63256).
  */
-fun angleInRadian(grad: Int, min: Int, sec: Int): Double =
-        ((((sec / 60.0) + min) / 60.0) + grad) / (180/PI)
+fun angleInRadian(grad: Int, min: Int, sec: Int): Double {
+    val x1 = (sec /60.0)
+    val x2 = ((x1 + min)/ 60.0)
+    val x3 =  (x2 + grad) / (180/PI)
+    return  x3
+}
 
 /**
  * Тривиальная

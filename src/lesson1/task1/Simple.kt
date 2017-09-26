@@ -1,4 +1,5 @@
 @file:Suppress("UNUSED_PARAMETER")
+
 package lesson1.task1
 
 import java.lang.Math.*
@@ -52,7 +53,7 @@ fun main(args: Array<String>) {
  * Рассчитать время в секундах, прошедшее с начала суток (30035 в данном случае).
  */
 fun seconds(hours: Int, minutes: Int, seconds: Int): Int =
-        (((( hours * 60 ) + minutes ) * 60) + seconds)
+        ((((hours * 60) + minutes) * 60) + seconds)
 
 
 /**
@@ -69,6 +70,7 @@ fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double {
     val x4 = (x3 / 100)
     return x4
 }
+
 /**
  * Тривиальная
  *
@@ -76,10 +78,10 @@ fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double {
  * Вывести значение того же угла в радианах (например, 0.63256).
  */
 fun angleInRadian(grad: Int, min: Int, sec: Int): Double {
-    val minutes = (sec /60.0)
-    val gradus = ((minutes + min)/ 60.0)
-    val radians = (gradus + grad) / (180/PI)
-    return  radians
+    val minutes = (sec / 60.0)
+    val gradus = ((minutes + min) / 60.0)
+    val radians = (gradus + grad) / (180 / PI)
+    return radians
 }
 
 /**
@@ -108,7 +110,6 @@ fun thirdDigit(number: Int): Int {
 }
 
 
-
 /**
  * Простая
  *
@@ -131,7 +132,7 @@ fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minute
  * Например, 100 рублей под 10% годовых превратятся в 133.1 рубля
  */
 fun accountInThreeYears(initial: Int, percent: Int): Double =
-        initial*Math.pow((1.0+(percent/100.0)),3.0)
+        initial * Math.pow((1.0 + (percent / 100.0)), 3.0)
 
 /**
  * Простая
@@ -139,9 +140,9 @@ fun accountInThreeYears(initial: Int, percent: Int): Double =
  * Пользователь задает целое трехзначное число (например, 478).
  *Необходимо вывести число, полученное из заданного перестановкой цифр в обратном порядке (например, 874).
  */
-fun numberRevert(number: Int): Int  {
-    val x1 = (number / 100 )
+fun numberRevert(number: Int): Int {
+    val x1 = (number / 100)
     val x2 = (number / 10 % 10 * 10)
     val x3 = (number % 10 * 100)
-    return x1+x2+x3
+    return x1 + x2 + x3
 }

@@ -64,10 +64,10 @@ fun seconds(hours: Int, minutes: Int, seconds: Int): Int =
  * 1 сажень = 3 аршина = 48 вершков, 1 вершок = 4.445 см.
  */
 fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double {
-    val x1 = (sagenes * 48)
-    val x2 = (arshins * 16)
-    val x3 = ((x1 + x2 + vershoks) * 4.445)
-    val x4 = (x3 / 100)
+    val x1 = sagenes * 48
+    val x2 = arshins * 16
+    val x3 = (x1 + x2 + vershoks) * 4.445
+    val x4 = x3 / 100
     return x4
 }
 
@@ -78,8 +78,8 @@ fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double {
  * Вывести значение того же угла в радианах (например, 0.63256).
  */
 fun angleInRadian(grad: Int, min: Int, sec: Int): Double {
-    val minutes = (sec / 60.0)
-    val gradus = ((minutes + min) / 60.0)
+    val minutes = sec / 60.0
+    val gradus = (minutes + min) / 60.0
     val radians = (gradus + grad) / (180 / PI)
     return radians
 }
@@ -105,7 +105,7 @@ fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double): Double {
  */
 fun thirdDigit(number: Int): Int {
     val x1 = number / 100
-    val x2 = (x1 % 10)
+    val x2 = x1 % 10
     return x2
 }
 
@@ -118,9 +118,9 @@ fun thirdDigit(number: Int): Int {
  * Определите время поезда в пути в минутах (в данном случае 216).
  */
 fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minutesArrive: Int): Int {
-    val x1 = (hoursArrive - hoursDepart)
-    val x2 = (minutesArrive - minutesDepart)
-    val x3 = ((x1 * 60) + x2)
+    val x1 = hoursArrive - hoursDepart
+    val x2 = minutesArrive - minutesDepart
+    val x3 = x1 * 60 + x2
     return x3
 }
 
@@ -141,8 +141,8 @@ fun accountInThreeYears(initial: Int, percent: Int): Double =
  *Необходимо вывести число, полученное из заданного перестановкой цифр в обратном порядке (например, 874).
  */
 fun numberRevert(number: Int): Int {
-    val x1 = (number / 100)
-    val x2 = (number / 10 % 10 * 10)
-    val x3 = (number % 10 * 100)
+    val x1 = number / 100
+    val x2 = number / 10 % 10 * 10
+    val x3 = number % 10 * 100
     return x1 + x2 + x3
 }

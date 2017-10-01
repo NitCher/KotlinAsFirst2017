@@ -35,13 +35,12 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  * вернуть строку вида: «21 год», «32 года», «12 лет».
  */
 fun ageDescription(age: Int): String = when {
-        age in 5..20 || age in 105..120  -> "$age лет"
-        age % 10 == 1 -> "$age год"
-        age % 10 in 2..4 -> "$age года"
-        age % 10 in 5..9 -> "$age лет"
-        else -> "$age лет"
-    }
-
+    age in 5..20 || age in 105..120 -> "$age лет"
+    age % 10 == 1 -> "$age год"
+    age % 10 in 2..4 -> "$age года"
+    age % 10 in 5..9 -> "$age лет"
+    else -> "$age лет"
+}
 
 
 /**
@@ -54,7 +53,6 @@ fun ageDescription(age: Int): String = when {
 fun timeForHalfWay(t1: Double, v1: Double,
                    t2: Double, v2: Double,
                    t3: Double, v3: Double): Double = TODO()
-
 
 
 /**
@@ -113,10 +111,10 @@ fun triangleKind(a: Double, b: Double, c: Double): Int = TODO()
  */
 fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int = when {
 
-     (a < d && b == c || d == a && b > d) -> 0
-     (a > c && b < d) -> b - a
-     (a > c && a < d && b > d)-> d - a
-     (b > c && b < d) -> b - c
-     (b > c && b > d && a < d) -> d - c
+    (a < d && b == c || d == a && b > d) -> 0
+    (a > c && b < d) -> b - a
+    (a > c && a < d && b > d) -> d - a
+    (b > c && b < d) -> b - c
+    (b > c && b > d && a < d) -> d - c
     else -> -1
 }

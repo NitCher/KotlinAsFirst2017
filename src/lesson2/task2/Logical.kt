@@ -1,4 +1,5 @@
 @file:Suppress("UNUSED_PARAMETER")
+
 package lesson2.task2
 
 import lesson1.task1.sqr
@@ -19,8 +20,9 @@ fun pointInsideCircle(x: Double, y: Double, x0: Double, y0: Double, r: Double) =
  */
 fun isNumberHappy(number: Int): Boolean {
 
-        return (number / 1000 + (number % 1000 /100) == number % 100 /10 + number % 10 )
+    return (number / 1000 + (number % 1000 / 100) == number % 100 / 10 + number % 10)
 }
+
 /**
  * Простая
  *
@@ -38,14 +40,14 @@ fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = TODO()
  * Вернуть true, если утверждение верно
  */
 fun circleInside(x1: Double, y1: Double, r1: Double,
-                 x2: Double, y2: Double, r2: Double): Boolean {
-    if (x1 == x2 && y1 == y2 && r1>r2) return false
-    if (x1 == x2 && y1 == y2 && r1<r2) return true
-    if (x1 == 0.0 && x2>r1 || y1 == 0.0 && y2>r1 && r2<r1*r1 ) return false
-    if (x2 == 0.0 && x1>r2 || y2 == 0.0 && y1>r2 && r1<r2*r2) return false
-    if (x1 == x2 && y1 == y2 && r1 == r2) return true
-    if (Math.sqrt(sqr(x2 - x1) + sqr(y2 - y1)) + r1 <= r2) return true
-    else return false
+                 x2: Double, y2: Double, r2: Double): Boolean = when {
+    (x1 == x2 && y1 == y2 && r1 > r2) -> false
+    (x1 == x2 && y1 == y2 && r1 < r2) -> true
+    (x1 == 0.0 && x2 > r1 || y1 == 0.0 && y2 > r1 && r2 < r1 * r1) -> false
+    (x2 == 0.0 && x1 > r2 || y2 == 0.0 && y1 > r2 && r1 < r2 * r2) -> false
+    (x1 == x2 && y1 == y2 && r1 == r2) -> true
+    (Math.sqrt(sqr(x2 - x1) + sqr(y2 - y1)) + r1 <= r2) -> true
+    else -> false
 }
 
 /**

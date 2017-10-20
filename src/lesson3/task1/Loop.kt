@@ -63,22 +63,36 @@ fun digitCountInNumber(n: Int, m: Int): Int =
 fun digitNumber(n: Int): Int {
     var count = 0
     var number = n
-    while (n != 0) {
-        if (n % 10 != 0) {
-            count++
-        }
-        number /= 10
-
+    if (n == 0) return 1
+    while (number > 0) {
+        count++
+        number = number / 10
+        if (number % 10 == 0) break
     }
     return count
-}
+    }
+
 /**
  * Простая
  *
  * Найти число Фибоначчи из ряда 1, 1, 2, 3, 5, 8, 13, 21, ... с номером n.
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
-fun fib(n: Int): Int = TODO()
+fun fib(n: Int): Int {
+    var fib1 = 1
+    var fib2 = 1
+    var fibn = 0
+    if (n > 2) {
+        for (x in 3..n){
+            fibn = fib2 + fib1
+            fib1 = fib2
+            fib2 = fibn
+        }
+        return fibn
+    }
+    else return 1
+}
+
 /**
  * Простая
  *
@@ -86,14 +100,13 @@ fun fib(n: Int): Int = TODO()
  * минимальное число k, которое делится и на m и на n без остатка
  */
 fun lcm(m: Int, n: Int): Int = TODO()
-
 /**
  * Простая
  *
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
-    for (i in 2..n+1) {
+    for (i in 2..n) {
         if (n % i == 0) return i
     }
     return n
@@ -123,18 +136,22 @@ fun isCoPrime(m: Int, n: Int): Boolean = TODO()
 /**
  * Простая
  *
- * Для заданных чисел m и n, m <= n, определить, имеется ли хотя бы один точный квадрат между m и n,
+ * Для заданных чисел m и n, m <= n, определить, имеется ли хотя бы один точ ный квадрат между m и n,
  * то есть, существует ли такое целое k, что m <= k*k <= n.
- * Например, для интервала 21..28 21 <= 5*5 <= 28, а для интервала 51..61 квадрата не существует.
+ * Например, для интервала 21..28 21 <= 5*5 <= 28, а для интервала 51..61 кв адрата не существует.
  */
-fun squareBetweenExists(m: Int, n: Int): Boolean = TODO()
+fun squareBetweenExists(m: Int, n: Int): Boolean {
+    val k = (Math.sqrt(n.toDouble())).toInt()
+    return k*k >= m
+}
+
 
 /**
  * Средняя
  *
  * Для заданного x рассчитать с заданной точностью eps
  * sin(x) = x - x^3 / 3! + x^5 / 5! - x^7 / 7! + ...
- * Нужную точность считать достигнутой, если очередной член ряда меньше eps по модулю
+ * Нужную точность считать достигнутой, если очередной член ряда меньше eps  по модулю
  */
 fun sin(x: Double, eps: Double): Double = TODO()
 
@@ -153,7 +170,15 @@ fun cos(x: Double, eps: Double): Double = TODO()
  * Поменять порядок цифр заданного числа n на обратный: 13478 -> 87431.
  * Не использовать строки при решении задачи.
  */
-fun revert(n: Int): Int = TODO()
+fun revert(n: Int): Int {
+    var f = n
+    var number = 0
+    while (f % 10 != 0) {
+        number = number * 10 + f % 10
+        f = f / 10
+    }
+    return number
+}
 
 /**
  * Средняя
@@ -162,7 +187,7 @@ fun revert(n: Int): Int = TODO()
  * первая цифра равна последней, вторая -- предпоследней и так далее.
  * 15751 -- палиндром, 3653 -- нет.
  */
-fun isPalindrome(n: Int): Boolean =TODO()
+fun isPalindrome(n: Int): Boolean = TODO()
 
 /**
  * Средняя
@@ -180,6 +205,8 @@ fun hasDifferentDigits(n: Int): Boolean = TODO()
  * Например, 2-я цифра равна 4, 7-я 5, 12-я 6.
  */
 fun squareSequenceDigit(n: Int): Int = TODO()
+
+
 
 /**
  * Сложная

@@ -40,15 +40,11 @@ fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = TODO()
  * Вернуть true, если утверждение верно
  */
 fun circleInside(x1: Double, y1: Double, r1: Double,
-                 x2: Double, y2: Double, r2: Double): Boolean = when {
-    (x1 == x2 && y1 == y2 && r1 > r2) -> false
-    (x1 == x2 && y1 == y2 && r1 < r2) -> true
-    (x1 == 0.0 && x2 > r1 || y1 == 0.0 && y2 > r1 && r2 < r1 * r1) -> false
-    (x2 == 0.0 && x1 > r2 || y2 == 0.0 && y1 > r2 && r1 < r2 * r2) -> false
-    (x1 == x2 && y1 == y2 && r1 == r2) -> true
-    (Math.sqrt(sqr(x2 - x1) + sqr(y2 - y1)) + r1 <= r2) -> true
-    else -> false
+                 x2: Double, y2: Double, r2: Double): Boolean {
+    return r2 >= r1 + Math.sqrt(sqr(x1 - x2) + sqr(y1 - y2))
 }
+
+
 
 /**
  * Средняя

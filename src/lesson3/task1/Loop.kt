@@ -1,4 +1,5 @@
 @file:Suppress("UNUSED_PARAMETER")
+
 package lesson3.task1
 
 /**
@@ -34,7 +35,7 @@ fun isPrime(n: Int): Boolean {
  */
 fun isPerfect(n: Int): Boolean {
     var sum = 1
-    for (m in 2..n/2) {
+    for (m in 2..n / 2) {
         if (n % m > 0) continue
         sum += m
         if (sum > n) break
@@ -65,12 +66,11 @@ fun digitNumber(n: Int): Int {
     var number = n
     if (n == 0) return 1
     while (number > 0) {
+        number /= 10
         count++
-        number = number / 10
-        if (number % 10 == 0) break
     }
     return count
-    }
+}
 
 /**
  * Простая
@@ -82,15 +82,13 @@ fun fib(n: Int): Int {
     var fib1 = 1
     var fib2 = 1
     var fibn = 0
-    if (n > 2) {
-        for (x in 3..n){
-            fibn = fib2 + fib1
-            fib1 = fib2
-            fib2 = fibn
-        }
-        return fibn
+    if (n <= 2) return 1
+    for (x in 3..n) {
+        fibn = fib2 + fib1
+        fib1 = fib2
+        fib2 = fibn
     }
-    else return 1
+    return fibn
 }
 
 /**
@@ -100,6 +98,7 @@ fun fib(n: Int): Int {
  * минимальное число k, которое делится и на m и на n без остатка
  */
 fun lcm(m: Int, n: Int): Int = TODO()
+
 /**
  * Простая
  *
@@ -118,11 +117,12 @@ fun minDivisor(n: Int): Int {
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
 fun maxDivisor(n: Int): Int {
-    for (i in n-1 downTo 1) {
+    for (i in n - 1 downTo 1) {
         if (n % i == 0) return i
     }
     return n
 }
+
 /**
  * Простая
  *
@@ -142,7 +142,7 @@ fun isCoPrime(m: Int, n: Int): Boolean = TODO()
  */
 fun squareBetweenExists(m: Int, n: Int): Boolean {
     val k = (Math.sqrt(n.toDouble())).toInt()
-    return k*k >= m
+    return k * k >= m
 }
 
 
@@ -173,9 +173,9 @@ fun cos(x: Double, eps: Double): Double = TODO()
 fun revert(n: Int): Int {
     var f = n
     var number = 0
-    while (f % 10 != 0) {
+    while (f != 0) {
         number = number * 10 + f % 10
-        f = f / 10
+        f /= 10
     }
     return number
 }
@@ -204,8 +204,23 @@ fun hasDifferentDigits(n: Int): Boolean = TODO()
  * 149162536496481100121144...
  * Например, 2-я цифра равна 4, 7-я 5, 12-я 6.
  */
-fun squareSequenceDigit(n: Int): Int = TODO()
-
+fun squareSequenceDigit(n: Int): Int {
+    var l = 0                //(l)ength - длина
+    var s = 0                //(s)tring - строка
+    var c = 1                //(c)ount - счёт
+    while (l < n) {
+        s = c * c
+        l += digitNumber(s)
+        c++
+    }
+    if (l > n) {
+        while (l != n) {
+            s /= 10
+            l--
+        }
+    }
+    return s % 10
+}
 
 
 /**
@@ -215,4 +230,20 @@ fun squareSequenceDigit(n: Int): Int = TODO()
  * 1123581321345589144...
  * Например, 2-я цифра равна 1, 9-я 2, 14-я 5.
  */
-fun fibSequenceDigit(n: Int): Int = TODO()
+fun fibSequenceDigit(n: Int): Int {
+    var l = 0               //(l)ength - длина
+    var s = 0               //(s)tring - строка
+    var c = 1               //(c)ount - счёт
+    while (l < n) {
+        s = fib(c)
+        l += digitNumber(s)
+        c++
+    }
+    if (l > n) {
+        while (l != n) {
+            s /= 10
+            l--
+        }
+    }
+    return s % 10
+}

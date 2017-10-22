@@ -65,7 +65,10 @@ fun timeForHalfWay(t1: Double, v1: Double,
 fun whichRookThreatens(kingX: Int, kingY: Int,
                        rookX1: Int, rookY1: Int,
                        rookX2: Int, rookY2: Int): Int = when {
-    (kingX == rookX1 || kingY == rookY1) && (kingX == rookX2 || kingY == rookY2) -> 3
+    kingX == rookX1 && kingX == rookX2 -> 3       // Это единственный варинт, который пришел мне в голову
+    kingX == rookX1 && kingY == rookY2 -> 3
+    kingY == rookY1 && kingX == rookX2 -> 3
+    kingY == rookY1 && kingY == rookY2 -> 3
     kingX == rookX2 -> 2
     kingY == rookY2 -> 2
     kingX == rookX1 -> 1
@@ -111,10 +114,10 @@ fun triangleKind(a: Double, b: Double, c: Double): Int = TODO()
  */
 fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int = when {
 
-    (a <= d && b == c || d == a && b > d) -> 0
-    (a >= c && b <= d) -> b - a
-    (a >= c && a <= d && b >= d) -> d - a
-    (b >= c && b <= d) -> b - c
-    (b >= c && b >= d && a <= c) -> d - c
+     b == c  -> 0                      // Координата конца первого = координает начала второго Пример |--/a--b/(c--d)--|
+    (a >= c && b <= d) -> b - a               // ab входит в cd. Пример |--(c--/a--b/--d)--|
+    (a >= c && a <= d && b >= d) -> d - a   //отрезки пересекаются, начало первого - дальше, Пример |--(c--/a--d)--b/--|
+    (b >= c && b <= d) -> b - c            //отрезки пересекаются, начало второго - дальше  Пример |--/a--(c--b/--d)--|
+    (b >= c && b >= d && a <= c) -> d - c  //cd входит в ab. Пример |--/a--(c--d)--c/--|
     else -> -1
 }

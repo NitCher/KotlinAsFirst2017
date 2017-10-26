@@ -35,9 +35,9 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  * вернуть строку вида: «21 год», «32 года», «12 лет».
  */
 fun ageDescription(age: Int): String = when {
-     age % 10 == 1 && age % 100 / 10 != 1 -> "$age год"
-     age % 10 in 2..4 && age % 100 / 10 != 1 -> "$age года"
-     else -> "$age лет"
+    age % 10 == 1 && age % 100 / 10 != 1 -> "$age год"
+    age % 10 in 2..4 && age % 100 / 10 != 1 -> "$age года"
+    else -> "$age лет"
 }
 
 
@@ -64,19 +64,14 @@ fun timeForHalfWay(t1: Double, v1: Double,
  */
 fun whichRookThreatens(kingX: Int, kingY: Int,
                        rookX1: Int, rookY1: Int,
-                       rookX2: Int, rookY2: Int): Int = when {
-    kingX == rookX1 && kingX == rookX2 -> 3       // Это единственный варинт, который пришел мне в голову
-    kingX == rookX1 && kingY == rookY2 -> 3
-    kingY == rookY1 && kingX == rookX2 -> 3
-    kingY == rookY1 && kingY == rookY2 -> 3
-    kingX == rookX2 -> 2
-    kingY == rookY2 -> 2
-    kingX == rookX1 -> 1
-    kingY == rookY1 -> 1
-    else -> 0
-
+                       rookX2: Int, rookY2: Int): Int {
+    var a = 0
+    if (kingX == rookX1 || kingY == rookY1)
+        a += 1
+    if (kingX == rookX2 || kingY == rookY2)
+        a += 2
+    return a
 }
-
 
 /**
  * Простая
@@ -113,11 +108,15 @@ fun triangleKind(a: Double, b: Double, c: Double): Int = TODO()
  * Если пересечения нет, вернуть -1.
  */
 fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int = when {
-
-     b == c  -> 0                      // Координата конца первого = координает начала второго Пример |--/a--b/(c--d)--|
-    (a >= c && b <= d) -> b - a               // ab входит в cd. Пример |--(c--/a--b/--d)--|
-    (a >= c && a <= d && b >= d) -> d - a   //отрезки пересекаются, начало первого - дальше, Пример |--(c--/a--d)--b/--|
-    (b >= c && b <= d) -> b - c            //отрезки пересекаются, начало второго - дальше  Пример |--/a--(c--b/--d)--|
-    (b >= c && b >= d && a <= c) -> d - c  //cd входит в ab. Пример |--/a--(c--d)--c/--|
+// Координата конца первого = координает начала второго Пример |--/a--b/(c--d)--|
+    b == c -> 0
+// ab входит в cd. Пример |--(c--/a--b/--d)--|
+    (a >= c && b <= d) -> b - a
+//отрезки пересекаются, начало первого - дальше, Пример |--(c--/a--d)--b/--|
+    (a >= c && a <= d && b >= d) -> d - a
+//отрезки пересекаются, начало второго - дальше  Пример |--/a--(c--b/--d)--|
+    (b >= c && b <= d) -> b - c
+//cd входит в ab. Пример |--/a--(c--d)--c/--|
+    (b >= c && b >= d && a <= c) -> d - c
     else -> -1
 }

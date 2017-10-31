@@ -205,9 +205,9 @@ fun hasDifferentDigits(n: Int): Boolean = TODO()
  * Например, 2-я цифра равна 4, 7-я 5, 12-я 6.
  */
 fun squareSequenceDigit(n: Int): Int {
-    var length = 0                //(l)ength - длина
-    var string = 0                //(s)tring - строка
-    var count = 1                //(c)ount - счёт
+    var length = 0
+    var string = 0
+    var count = 1
     while (length < n) {
         string = count * count
         length += digitNumber(string)

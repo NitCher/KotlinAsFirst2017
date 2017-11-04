@@ -136,12 +136,12 @@ fun isCoPrime(m: Int, n: Int): Boolean = TODO()
 /**
  * Простая
  *
- * Для заданных чисел m и n, m <= n, определить, имеется ли хотя бы один точ ный квадрат между m и n,
+ * Для заданных чисел m и n, m <= n, определить, имеется ли хотя бы один точный квадрат между m и n,
  * то есть, существует ли такое целое k, что m <= k*k <= n.
  * Например, для интервала 21..28 21 <= 5*5 <= 28, а для интервала 51..61 кв адрата не существует.
  */
 fun squareBetweenExists(m: Int, n: Int): Boolean {
-    val k = (Math.sqrt(n.toDouble())).toInt()
+    val k = Math.floor(Math.sqrt(n.toDouble()))
     return k * k >= m
 }
 
@@ -206,20 +206,20 @@ fun hasDifferentDigits(n: Int): Boolean = TODO()
  */
 fun squareSequenceDigit(n: Int): Int {
     var length = 0
-    var string = 0
+    var squre = 0
     var count = 1
     while (length < n) {
-        string = count * count
-        length += digitNumber(string)
+        squre = count * count
+        length += digitNumber(squre)
         count++
     }
     if (length > n) {
         while (length != n) {
-            string /= 10
+            squre /= 10
             length--
         }
     }
-    return string % 10
+    return squre % 10
 }
 
 
@@ -232,18 +232,18 @@ fun squareSequenceDigit(n: Int): Int {
  */
 fun fibSequenceDigit(n: Int): Int {
     var length = 0
-    var string = 0
+    var fib = 0
     var count = 1
     while (length < n) {
-        string = fib(count)
-        length += digitNumber(string)
+        fib = fib(count)
+        length += digitNumber(fib)
         count++
     }
     if (length > n) {
         while (length != n) {
-            string /= 10
+            fib /= 10
             length--
         }
     }
-    return string % 10
+    return fib % 10
 }

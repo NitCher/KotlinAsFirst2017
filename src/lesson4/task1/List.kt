@@ -1,7 +1,9 @@
 @file:Suppress("UNUSED_PARAMETER")
+
 package lesson4.task1
 
 import lesson1.task1.discriminant
+import java.io.File.separator
 
 /**
  * Пример
@@ -127,11 +129,10 @@ fun mean(list: List<Double>): Double {
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
 fun center(list: MutableList<Double>): MutableList<Double> {
-    if (list.isNotEmpty()) {
-        val s = list.sum() / list.size
-        for (i in 0 until list.size) {
-            list[i] -= s
-        }
+    if (list.isEmpty()) return list
+    val s = list.sum() / list.size
+    for (i in 0 until list.size) {
+        list[i] -= s
     }
     return list
 }
@@ -153,16 +154,16 @@ fun times(a: List<Double>, b: List<Double>): Double = TODO()
  * Коэффициенты многочлена заданы списком p: (p0, p1, p2, p3, ..., pN).
  * Значение пустого многочлена равно 0.0 при любом x.
  */
-fun polynom(p: List<Double>, x: Double): Double = when {
-    p.isEmpty() -> 0.0
-    else -> {
-        var sum = 0.0
+fun polynom(p: List<Double>, x: Double): Double {
+    var sum = 0.0
+    if (p.isNotEmpty()) {
         for (i in 0..p.lastIndex)
             sum += p[i] * Math.pow(x, i.toDouble())
-        sum
+        //Мне всё-таки кажется, что корень тут удобнее.
     }
-
+    return sum
 }
+
 /**
  * Средняя
  *
@@ -187,15 +188,14 @@ fun factorize(n: Int): List<Int> {
     var number = n
     var divider = 2
     while (number > 1) {
-        while (number % divider != 0){
+        while (number % divider != 0) {
             divider += 1
         }
-            number /= divider
-            result.add(divider)
-
-        }
-        return result.sorted()
+        number /= divider
+        result += divider
     }
+    return result
+}
 
 
 /**
@@ -204,7 +204,23 @@ fun factorize(n: Int): List<Int> {
  * Разложить заданное натуральное число n > 1 на простые множители.
  * Результат разложения вернуть в виде строки, например 75 -> 3*5*5
  */
-fun factorizeToString(n: Int): String = TODO()
+fun factorizeToString(n: Int): String {
+    val result = mutableListOf<Int>()
+    var number = n
+    var divider = 2
+    while (number > 1) {
+        while (number % divider != 0) {
+            divider += 1
+        }
+        number /= divider
+        result += divider
+    }
+
+    return result.joinToString(
+            separator = "*"
+    )
+}
+
 
 /**
  * Средняя
@@ -213,7 +229,16 @@ fun factorizeToString(n: Int): String = TODO()
  * Результат перевода вернуть в виде списка цифр в base-ичной системе от старшей к младшей,
  * например: n = 100, base = 4 -> (1, 2, 1, 0) или n = 250, base = 14 -> (1, 3, 12)
  */
-fun convert(n: Int, base: Int): List<Int> = TODO()
+fun convert(n: Int, base: Int): List<Int> {
+    val result = mutableListOf<Int>()
+    val number = base
+    var number2 = n
+    while (number2 != 0) {
+        result += number2 % number
+        number2 /= number
+    }
+    return result.reversed()
+}
 
 /**
  * Сложная

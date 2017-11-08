@@ -156,10 +156,8 @@ fun times(a: List<Double>, b: List<Double>): Double = TODO()
  */
 fun polynom(p: List<Double>, x: Double): Double {
     var sum = 0.0
-    if (p.isNotEmpty()) {
-        for (i in 0..p.lastIndex)
+        for (i in 0..p.lastIndex){
             sum += p[i] * Math.pow(x, i.toDouble())
-        //Мне всё-таки кажется, что корень тут удобнее.
     }
     return sum
 }

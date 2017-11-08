@@ -206,20 +206,20 @@ fun hasDifferentDigits(n: Int): Boolean = TODO()
  */
 fun squareSequenceDigit(n: Int): Int {
     var length = 0
-    var squre = 0
+    var square = 0
     var count = 1
     while (length < n) {
-        squre = count * count
-        length += digitNumber(squre)
+        square = count * count
+        length += digitNumber(square)
         count++
     }
     if (length > n) {
         while (length != n) {
-            squre /= 10
+            square /= 10
             length--
         }
     }
-    return squre % 10
+    return square % 10
 }
 
 

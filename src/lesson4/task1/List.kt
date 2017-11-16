@@ -156,8 +156,8 @@ fun times(a: List<Double>, b: List<Double>): Double = TODO()
  */
 fun polynom(p: List<Double>, x: Double): Double {
     var sum = 0.0
-        for (i in 0..p.lastIndex){
-            sum += p[i] * Math.pow(x, i.toDouble())
+    for (i in 0..p.lastIndex) {
+        sum += p[i] * Math.pow(x, i.toDouble())
     }
     return sum
 }
@@ -286,6 +286,19 @@ fun roman(n: Int): String {
     return roman
 }
 
+
+/* fun digitNumber(n: Int): Int {
+        var count = 0
+        var number = n
+        if (n == 0) return 1
+        while (number != 0) {
+            number /= 10
+            count++
+        }
+        return count
+    }*/
+
+
 /**
  * Очень сложная
  *
@@ -293,4 +306,31 @@ fun roman(n: Int): String {
  * Например, 375 = "триста семьдесят пять",
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
  */
-fun russian(n: Int): String = TODO()
+fun russian(n: Int): String {
+    var count = 0
+    var number = n
+    while (number != 0) {
+        number /= 10
+        count++
+    }
+    var rus = " "
+    //Числа
+    val a = arrayOf("", "один ", "два ", "три ", "четыре ", "пять ", "шесть ", "семь ", "восемь ", "девять ")
+    val b = arrayOf("", "десять ", "двадцать ", "тридцать ", "сорок ", "пятьдесят ", "шестьдесят ", "семьдесят ", "восемьдесят ", "девяносто ")
+    val c = arrayOf("", "сто ", "двести ", "триста ", "четыреста ", "пятьсот ", "шестьсот ", "семьсот ", "восемьсот ", "девятьсот ")
+    val d = arrayOf("", "одиннадцать ", "двенадцать ", "тринадцать ", "четырнадцать ", " пятнадцать ", " шестнадцать ", " семнадцать ", "восемнадцать ", "девятнадцать ")
+    //вспомогательные
+    val e = if (n % 100000 / 10000 == 1) d[n % 10000 / 1000] else b[n % 100000 / 10000] + (if (n % 10000 / 1000 == 2) "две " else a[n % 10000 / 1000])
+    val f = if (n % 100 / 10 == 1) d[n % 10] else b[n % 100 / 10] + a[n % 10]
+    val g = (if (n % 10000 / 1000 > 4 || n % 10000 / 1000 == 0) "тысяч " else "тысячи ")
+    //ответ
+    if (count == 6) rus = c[n / 100000] + e + g + c[n % 1000 / 100] + f
+    if (count == 5) rus = e + g + c[n % 1000 / 100] + f
+    if (count == 4) rus = (if (n % 10000 / 1000 == 2) "две " else a[n % 10000 / 1000]) + g + c[n % 1000 / 100] + f
+    if (count == 3) rus = c[n / 100] + f
+    if (count == 2) rus = f
+    if (count == 1) rus = a[n % 10]
+    return rus.trim()
+}
+
+

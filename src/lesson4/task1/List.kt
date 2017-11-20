@@ -329,7 +329,6 @@ fun russian(n: Int): String {
         if (n % 10000 / 1000 > 4 || n % 10000 / 1000 == 0 || n % 100000 / 10000 == 1) "тысяч " else "тысячи "
     }
 //ответ
-if (n == 0) rus = "ноль"
 if (count == 6) rus = c[n / 100000] + f + h + c[n % 1000 / 100] + g
 if (count == 5) rus = f + h + c[n % 1000 / 100] + g
 if (count == 4) rus = e + h + c[n % 1000 / 100] + g

@@ -66,8 +66,24 @@ fun main(args: Array<String>) {
  * День и месяц всегда представлять двумя цифрами, например: 03.04.2011.
  * При неверном формате входной строки вернуть пустую строку
  */
-fun dateStrToDigit(str: String): String = TODO()
+ fun dateStrToDigit(str: String): String {
+    val mou = listOf("января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября",
+            "октября", "ноября", "декабря")
+    return try {
+        val s = str.split(" ")
+        if (s.size != 3) return ""
+        else {
+            val day = s[0].toInt()
+            val mo = mou.indexOf(s[1]) + 1
+            val year = s[2].toInt()
+            if (mo == 0) "" else
+                String.format("%02d.%02d.%d", day, mo, year)
+        }
+    } catch (e:NumberFormatException) {
+        ""
+    }
 
+}
 /**
  * Средняя
  *
@@ -89,7 +105,23 @@ fun dateDigitToStr(digital: String): String = TODO()
  * Все символы в номере, кроме цифр, пробелов и +-(), считать недопустимыми.
  * При неверном формате вернуть пустую строку
  */
-fun flattenPhoneNumber(phone: String): String = TODO()
+fun flattenPhoneNumber(phone: String): String {
+    val list = mutableListOf<String>()
+    for (element in phone){
+        list.add(element.toString())
+    }
+    for (i in 0..list.size) {
+        list.remove(" ")
+        list.remove("(")
+        list.remove(")")
+        list.remove("-")
+    }
+    for(element in list)
+    {
+        if ((element !in "0".."9")&&(element != "+")) return ""
+    }
+    return list.joinToString (separator = "")
+}
 
 /**
  * Средняя
@@ -102,7 +134,6 @@ fun flattenPhoneNumber(phone: String): String = TODO()
  * При нарушении формата входной строки или при отсутствии в ней чисел, вернуть -1.
  */
 fun bestLongJump(jumps: String): Int = TODO()
-
 /**
  * Сложная
  *

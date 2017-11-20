@@ -45,7 +45,6 @@ fun circleInside(x1: Double, y1: Double, r1: Double,
 }
 
 
-
 /**
  * Средняя
  *
@@ -58,27 +57,15 @@ fun circleInside(x1: Double, y1: Double, r1: Double,
 fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean {
     val max1 = minOf(a, b, c)
     val max2 = when {
-       max1 == a -> minOf(b, c)
-       max1 == b -> minOf(a, c)
-       else -> minOf(b, a)
+        max1 == a -> minOf(b, c)
+        max1 == b -> minOf(a, c)
+        else -> minOf(b, a)
     }
-   return when {
+    return when {
         (max1 <= s && max2 <= s) && (max1 <= r || max2 <= r) -> true
         (max1 <= r && max2 <= r) && (max1 <= s || max2 <= s) -> true
         else -> false
-   }
+    }
 }
 
-
-/*
-a <= r && b <= r && (a <= s || b <= s) -> true
-a <= r && c <= r && (a <= s || c <= s) -> true
-b <= r && c <= r && (b <= s || c <= s) -> true
-a <= s && b <= s && (a <= r || b <= r) -> true
-a <= s && c <= s && (a <= r || c <= r) -> true
-b <= s && c <= s && (b <= r || c <= r) -> true
-else -> false
-}
-
-*/
 

@@ -55,31 +55,30 @@ fun circleInside(x1: Double, y1: Double, r1: Double,
  * кирпич 4 х 4 х 4 пройдёт через отверстие 4 х 4.
  * Вернуть true, если кирпич пройдёт
  */
-fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean = when {
-  a <= r && b <= r && (a <= s || b <= s) -> true
-  a <= r && c <= r && (a <= s || c <= s) -> true
-  b <= r && c <= r && (b <= s || c <= s) -> true
-  a <= s && b <= s && (a <= r || b <= r) -> true
-  a <= s && c <= s && (a <= r || c <= r) -> true
-  b <= s && c <= s && (b <= r || c <= r) -> true
-  else -> false
+fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean {
+    val max1 = minOf(a, b, c)
+    val max2 = when {
+       max1 == a -> minOf(b, c)
+       max1 == b -> minOf(a, c)
+       else -> minOf(b, a)
+    }
+   return when {
+        (max1 <= s && max2 <= s) && (max1 <= r || max2 <= r) -> true
+        (max1 <= r && max2 <= r) && (max1 <= s || max2 <= s) -> true
+        else -> false
+   }
 }
 
+
 /*
-Я попытался написать слеюдующую программу:
-{
-    val max1 = maxOf(a, b, c)
-    val max2 = when {
-        max1 == a -> maxOf(b, c)
-        max1 == b -> maxOf(a, c)
-        else -> maxOf(b, a)
-    }
-    when {
-         (max1 <= s && max2 <= s) && (max1 <= r || max2 <= r) -> true
-         (max1 <= r && max2 <= r) && (max1 <= s || max2 <= s) -> true
-         else -> false
-    }
+a <= r && b <= r && (a <= s || b <= s) -> true
+a <= r && c <= r && (a <= s || c <= s) -> true
+b <= r && c <= r && (b <= s || c <= s) -> true
+a <= s && b <= s && (a <= r || b <= r) -> true
+a <= s && c <= s && (a <= r || c <= r) -> true
+b <= s && c <= s && (b <= r || c <= r) -> true
+else -> false
 }
-Но она, все же, выдавала ошибку, могу узнать где я... сделал не так ?
+
 */
 

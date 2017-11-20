@@ -202,22 +202,7 @@ fun factorize(n: Int): List<Int> {
  * Разложить заданное натуральное число n > 1 на простые множители.
  * Результат разложения вернуть в виде строки, например 75 -> 3*5*5
  */
-fun factorizeToString(n: Int): String {
-    val result = mutableListOf<Int>()
-    var number = n
-    var divider = 2
-    while (number > 1) {
-        while (number % divider != 0) {
-            divider += 1
-        }
-        number /= divider
-        result += divider
-    }
-
-    return result.joinToString(
-            separator = "*"
-    )
-}
+fun factorizeToString(n: Int): String = factorize(n).joinToString(separator = "*")
 
 
 /**
@@ -229,12 +214,11 @@ fun factorizeToString(n: Int): String {
  */
 fun convert(n: Int, base: Int): List<Int> {
     val result = mutableListOf<Int>()
-    val number = base
-    var number2 = n
-    while (number2 >= 0) {
-        result += number2 % number
-        number2 /= number
-        if (number2 == 0) break
+    var number = n
+    while (number >= 0) {
+        result += number % base
+        number /= base
+        if (number == 0) break
     }
     return result.reversed()
 }
@@ -286,19 +270,6 @@ fun roman(n: Int): String {
     return roman
 }
 
-
-/* fun digitNumber(n: Int): Int {
-        var count = 0
-        var number = n
-        if (n == 0) return 1
-        while (number != 0) {
-            number /= 10
-            count++
-        }
-        return count
-    }*/
-
-
 /**
  * Очень сложная
  *
@@ -320,22 +291,22 @@ fun russian(n: Int): String {
     val c = arrayOf("", "сто ", "двести ", "триста ", "четыреста ", "пятьсот ", "шестьсот ", "семьсот ", "восемьсот ", "девятьсот ")
     val d = arrayOf("", "одиннадцать ", "двенадцать ", "тринадцать ", "четырнадцать ", "пятнадцать ", "шестнадцать ", "семнадцать ", "восемнадцать ", "девятнадцать ")
     //вспомогательные
-    val e = if (n % 10000 / 1000 == 2) "две " else {
+    val exceptions = if (n % 10000 / 1000 == 2) "две " else {
         if (n % 10000 / 1000 == 1) "одна " else a[n % 10000 / 1000]
     }
-    val f = if (n % 100000 / 10000 == 1) d[n % 10000 / 1000] else b[n % 100000 / 10000] + e
-    val g = if (n % 100 / 10 == 1 && n % 10  != 0) d[n % 10] else b[n % 100 / 10] + a[n % 10]
-    val h = if (n % 10000 / 1000 == 1 && n % 100000 / 10000 != 1) "тысяча " else {
-        if (n % 10000 / 1000 > 4 || n % 10000 / 1000 == 0 || n % 100000 / 10000 == 1) "тысяч " else "тысячи "
+    val NotInfirstTen1 = if (n / 10000 % 10 == 1) d[n / 1000 % 10] else b[n / 10000 % 10] + exceptions
+    val NotInfirstTen2 = if (n % 100 / 10 == 1 && n % 10 != 0) d[n % 10] else b[n % 100 / 10] + a[n % 10]
+    val thousand = if (n / 1000 % 10 == 1 && n/ 10000 % 10 != 1) "тысяча " else {
+        if (n / 1000 % 10 > 4 || n/ 1000 % 10 == 0 || n / 10000 % 10 == 1) "тысяч " else "тысячи "
     }
-//ответ
-if (count == 6) rus = c[n / 100000] + f + h + c[n % 1000 / 100] + g
-if (count == 5) rus = f + h + c[n % 1000 / 100] + g
-if (count == 4) rus = e + h + c[n % 1000 / 100] + g
-if (count == 3) rus = c[n / 100] + g
-if (count == 2) rus = g
-if (count == 1) rus = a[n % 10]
-return rus.trim()
+    //ответ
+    if (count == 6) rus = c[n / 100000] + NotInfirstTen1 + thousand + c[n/ 100 % 10] + NotInfirstTen2
+    if (count == 5) rus = NotInfirstTen1 + thousand + c[n/ 100 % 10] + NotInfirstTen2
+    if (count == 4) rus = exceptions + thousand + c[n/ 100 % 10] + NotInfirstTen2
+    if (count == 3) rus = c[n / 100] + NotInfirstTen2
+    if (count == 2) rus = NotInfirstTen2
+    if (count == 1) rus = a[n % 10]
+    return rus.trim()
 }
 
 

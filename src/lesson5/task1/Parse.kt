@@ -1,4 +1,5 @@
 @file:Suppress("UNUSED_PARAMETER")
+
 package lesson5.task1
 
 /**
@@ -48,12 +49,10 @@ fun main(args: Array<String>) {
         val seconds = timeStrToSeconds(line)
         if (seconds == -1) {
             println("Введённая строка $line не соответствует формату ЧЧ:ММ:СС")
-        }
-        else {
+        } else {
             println("Прошло секунд с начала суток: $seconds")
         }
-    }
-    else {
+    } else {
         println("Достигнут <конец файла> в процессе чтения строки. Программа прервана")
     }
 }
@@ -66,7 +65,7 @@ fun main(args: Array<String>) {
  * День и месяц всегда представлять двумя цифрами, например: 03.04.2011.
  * При неверном формате входной строки вернуть пустую строку
  */
- fun dateStrToDigit(str: String): String {
+fun dateStrToDigit(str: String): String {
     val mou = listOf("января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября",
             "октября", "ноября", "декабря")
     return try {
@@ -79,11 +78,11 @@ fun main(args: Array<String>) {
             if (mo == 0) "" else
                 String.format("%02d.%02d.%d", day, mo, year)
         }
-    } catch (e:NumberFormatException) {
+    } catch (e: NumberFormatException) {
         ""
     }
-
 }
+
 /**
  * Средняя
  *
@@ -107,7 +106,7 @@ fun dateDigitToStr(digital: String): String = TODO()
  */
 fun flattenPhoneNumber(phone: String): String {
     val list = mutableListOf<String>()
-    for (element in phone){
+    for (element in phone) {
         list.add(element.toString())
     }
     for (i in 0..list.size) {
@@ -116,11 +115,10 @@ fun flattenPhoneNumber(phone: String): String {
         list.remove(")")
         list.remove("-")
     }
-    for(element in list)
-    {
-        if ((element !in "0".."9")&&(element != "+")) return ""
+    for (element in list) {
+        if ((element !in "0".."9") && (element != "+")) return ""
     }
-    return list.joinToString (separator = "")
+    return list.joinToString(separator = "")
 }
 
 /**
@@ -134,6 +132,7 @@ fun flattenPhoneNumber(phone: String): String {
  * При нарушении формата входной строки или при отсутствии в ней чисел, вернуть -1.
  */
 fun bestLongJump(jumps: String): Int = TODO()
+
 /**
  * Сложная
  *

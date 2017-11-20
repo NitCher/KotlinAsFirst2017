@@ -296,13 +296,13 @@ fun russian(n: Int): String {
     }
     val NotInfirstTen1 = if (n / 10000 % 10 == 1) d[n / 1000 % 10] else b[n / 10000 % 10] + exceptions
     val NotInfirstTen2 = if (n % 100 / 10 == 1 && n % 10 != 0) d[n % 10] else b[n % 100 / 10] + a[n % 10]
-    val thousand = if (n / 1000 % 10 == 1 && n/ 10000 % 10 != 1) "тысяча " else {
-        if (n / 1000 % 10 > 4 || n/ 1000 % 10 == 0 || n / 10000 % 10 == 1) "тысяч " else "тысячи "
+    val thousand = if (n / 1000 % 10 == 1 && n / 10000 % 10 != 1) "тысяча " else {
+        if (n / 1000 % 10 > 4 || n / 1000 % 10 == 0 || n / 10000 % 10 == 1) "тысяч " else "тысячи "
     }
     //ответ
-    if (count == 6) rus = c[n / 100000] + NotInfirstTen1 + thousand + c[n/ 100 % 10] + NotInfirstTen2
-    if (count == 5) rus = NotInfirstTen1 + thousand + c[n/ 100 % 10] + NotInfirstTen2
-    if (count == 4) rus = exceptions + thousand + c[n/ 100 % 10] + NotInfirstTen2
+    if (count == 6) rus = c[n / 100000] + NotInfirstTen1 + thousand + c[n / 100 % 10] + NotInfirstTen2
+    if (count == 5) rus = NotInfirstTen1 + thousand + c[n / 100 % 10] + NotInfirstTen2
+    if (count == 4) rus = exceptions + thousand + c[n / 100 % 10] + NotInfirstTen2
     if (count == 3) rus = c[n / 100] + NotInfirstTen2
     if (count == 2) rus = NotInfirstTen2
     if (count == 1) rus = a[n % 10]

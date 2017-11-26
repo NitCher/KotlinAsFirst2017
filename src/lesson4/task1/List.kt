@@ -293,7 +293,9 @@ fun russian(n: Int): String {
     //вспомогательные
     val space = " "
     val exceptions = if (n / 1000 % 10 == 2) "две" + space else {
-        if (n / 1000 % 10 == 1) "одна" + space else a[n / 1000 % 10]
+        if (n / 1000 % 10 == 1) "одна" + space else {
+            if (n / 1000 % 10 != 0) a[n / 1000 % 10] + space else ""
+        }
     }
     val NotInfirstTen1 = if (n / 10000 % 10 == 1 && n / 1000 % 10 != 0) d[n / 1000 % 10] + space else {
         if (n / 10000 % 10 != 0) b[n / 10000 % 10] + space + exceptions else exceptions

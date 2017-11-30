@@ -156,8 +156,10 @@ fun times(a: List<Double>, b: List<Double>): Double = TODO()
  */
 fun polynom(p: List<Double>, x: Double): Double {
     var sum = 0.0
+    var powx = 1.0
     for (i in 0..p.lastIndex) {
-        sum += p[i] * Math.pow(x, i.toDouble())
+        sum += p[i] * powx
+        powx *= x
     }
     return sum
 }
@@ -261,14 +263,8 @@ fun decimalFromString(str: String, base: Int): Int = TODO()
  * 90 = XC, 100 = C, 400 = CD, 500 = D, 900 = CM, 1000 = M.
  * Например: 23 = XXIII, 44 = XLIV, 100 = C
  */
-fun roman(n: Int): String {
-    val singles = arrayOf("", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX")
-    val tens = arrayOf("", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC")
-    val hundreds = arrayOf("", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM")
-    val thousands = arrayOf("", "M", "MM", "MMM")
-    val roman = thousands[n / 1000] + hundreds[n % 1000 / 100] + tens[n % 100 / 10] + singles[n % 10]
-    return roman
-}
+fun roman(n: Int): String = TODO()
+
 
 /**
  * Очень сложная

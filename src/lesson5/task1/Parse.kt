@@ -71,13 +71,11 @@ fun dateStrToDigit(str: String): String {
     return try {
         val s = str.split(" ")
         if (s.size != 3) return ""
-        else {
-            val day = s[0].toInt()
-            val mo = mou.indexOf(s[1]) + 1
-            val year = s[2].toInt()
-            if (mo == 0) "" else
-                String.format("%02d.%02d.%d", day, mo, year)
-        }
+        val day = s[0].toInt()
+        val mo = mou.indexOf(s[1]) + 1
+        if (mo == 0) return ""
+        val year = s[2].toInt()
+        return String.format("%02d.%02d.%d", day, mo, year)
     } catch (e: NumberFormatException) {
         ""
     }
@@ -105,20 +103,11 @@ fun dateDigitToStr(digital: String): String = TODO()
  * При неверном формате вернуть пустую строку
  */
 fun flattenPhoneNumber(phone: String): String {
-    val list = mutableListOf<String>()
-    for (element in phone) {
-        list.add(element.toString())
+    val whitelist = "1234567890+ -()"
+    for (char in phone) {
+        if (char !in whitelist || (char == '+' && '+' != phone[0])) return ""
     }
-    for (i in 0..list.size) {
-        list.remove(" ")
-        list.remove("(")
-        list.remove(")")
-        list.remove("-")
-    }
-    for (element in list) {
-        if ((element !in "0".."9") && (element != "+")) return ""
-    }
-    return list.joinToString(separator = "")
+    return Regex("""[^0-9|\+]""").replace(phone, "")
 }
 
 /**

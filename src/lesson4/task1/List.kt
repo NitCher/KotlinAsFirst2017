@@ -116,8 +116,8 @@ fun abs(v: List<Double>): Double = TODO()
  * Рассчитать среднее арифметическое элементов списка list. Вернуть 0.0, если список пуст
  */
 fun mean(list: List<Double>): Double {
-    if (list.isEmpty()) return 0.0
-    return list.sum() / list.size
+    return  if (list.isEmpty()) 0.0 else
+        list.sum() / list.size
 }
 
 /**
@@ -215,12 +215,12 @@ fun factorizeToString(n: Int): String = factorize(n).joinToString(separator = "*
  * например: n = 100, base = 4 -> (1, 2, 1, 0) или n = 250, base = 14 -> (1, 3, 12)
  */
 fun convert(n: Int, base: Int): List<Int> {
+    if (n == 0) return listOf(0)
     val result = mutableListOf<Int>()
     var number = n
-    while (number >= 0) {
+    while (number > 0) {
         result += number % base
         number /= base
-        if (number == 0) break
     }
     return result.reversed()
 }
@@ -264,6 +264,7 @@ fun decimalFromString(str: String, base: Int): Int = TODO()
  * Например: 23 = XXIII, 44 = XLIV, 100 = C
  */
 fun roman(n: Int): String = TODO()
+
 
 
 /**

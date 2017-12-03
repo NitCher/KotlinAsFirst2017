@@ -103,12 +103,12 @@ fun dateDigitToStr(digital: String): String = TODO()
  * При неверном формате вернуть пустую строку
  */
 fun flattenPhoneNumber(phone: String): String {
-    val whitelist = "1234567890+ -()"
+    val whitelist = "+ -()"
     var plus = 0
     for (char in phone) {
-        if (char !in whitelist ) return ""
+        if (char !in whitelist && char.isDigit() == false) return ""
         if (char == '+') plus++
-        if ( phone[0] != '+' && plus == 1 || plus > 1) return ""
+        if ( phone[0] != '+' && plus >= 1) return ""
     }
     return Regex("""[^0-9|\+]""").replace(phone, "")
 }

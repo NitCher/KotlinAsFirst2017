@@ -71,15 +71,19 @@ data class Circle(val center: Point, val radius: Double) {
      * Расстояние между непересекающимися окружностями рассчитывается как
      * расстояние между их центрами минус сумма их радиусов.
      * Расстояние между пересекающимися окружностями считать равным 0.0.
-     */
-    fun distance(other: Circle): Double = TODO()
+     **/
+    fun distance(other: Circle): Double {
+        val centers = (center.x - other.center.x) + (center.y - other.center.y)
+        return centers - radius - other.radius
+    }
 
     /**
      * Тривиальная
      *
      * Вернуть true, если и только если окружность содержит данную точку НА себе или ВНУТРИ себя
      */
-    fun contains(p: Point): Boolean = TODO()
+    fun contains(p: Point): Boolean = if ( sqr(p.x - center.x) + sqr(p.y - center.y) <= sqr(radius)) true
+    else false
 }
 
 /**
@@ -99,7 +103,21 @@ data class Segment(val begin: Point, val end: Point) {
  * Дано множество точек. Вернуть отрезок, соединяющий две наиболее удалённые из них.
  * Если в множестве менее двух точек, бросить IllegalArgumentException
  */
-fun diameter(vararg points: Point): Segment = TODO()
+fun diameter(vararg points: Point): Segment {
+    var max = 0.0
+    var pairOfMax = Pair(points[0], points[1])
+    for (i in 0..points.lastIndex) {
+        for (j in 0..points.lastIndex) {
+            val distance = points[i].distance(points[j])
+            if (max < distance) {
+                max = distance
+                pairOfMax = Pair(points[i], points[j])
+            }
+        }
+    }
+    return Segment(pairOfMax.first, pairOfMax.second)
+}
+
 
 /**
  * Простая

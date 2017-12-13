@@ -116,7 +116,7 @@ fun abs(v: List<Double>): Double = TODO()
  * Рассчитать среднее арифметическое элементов списка list. Вернуть 0.0, если список пуст
  */
 fun mean(list: List<Double>): Double {
-    return  if (list.isEmpty()) 0.0 else
+    return if (list.isEmpty()) 0.0 else
         list.sum() / list.size
 }
 
@@ -266,7 +266,6 @@ fun decimalFromString(str: String, base: Int): Int = TODO()
 fun roman(n: Int): String = TODO()
 
 
-
 /**
  * Очень сложная
  *
@@ -289,22 +288,29 @@ fun russian(n: Int): String {
     val d = arrayOf("", "одиннадцать", "двенадцать", "тринадцать", "четырнадцать", "пятнадцать", "шестнадцать", "семнадцать", "восемнадцать", "девятнадцать")
     //вспомогательные
     val space = " "
-    val exceptions = if (n / 1000 % 10 == 2) "две" + space else {
-        if (n / 1000 % 10 == 1) "одна" + space else {
-            if (n / 1000 % 10 != 0) a[n / 1000 % 10] + space else ""
-        }
+    val exceptions = when {
+        (n / 1000 % 10 == 2) -> "две" + space
+        (n / 1000 % 10 == 1) -> "одна" + space
+        (n / 1000 % 10 != 0) -> a[n / 1000 % 10] + space
+        else -> ""
     }
-    val NotInfirstTen1 = if (n / 10000 % 10 == 1 && n / 1000 % 10 != 0) d[n / 1000 % 10] + space else {
-        if (n / 10000 % 10 != 0) b[n / 10000 % 10] + space + exceptions else exceptions
+    val NotInfirstTen1 = when {
+        (n / 10000 % 10 == 1 && n / 1000 % 10 != 0) -> d[n / 1000 % 10] + space
+        (n / 10000 % 10 != 0) -> b[n / 10000 % 10] + space + exceptions
+        else -> exceptions
     }
-    val NotInfirstTen2 = if (n % 100 / 10 == 1 && n % 10 != 0) d[n % 10] + space else {
-        if (n % 100 / 10 != 0) b[n % 100 / 10] + space + a[n % 10] else a[n % 10]
+    val NotInfirstTen2 = when {
+        (n % 100 / 10 == 1 && n % 10 != 0) -> d[n % 10] + space
+        (n % 100 / 10 != 0) -> b[n % 100 / 10] + space + a[n % 10]
+        else -> a[n % 10]
     }
-    val thousand = if (n / 1000 % 10 == 1 && n / 10000 % 10 != 1) "тысяча" + space else {
-        if (n / 1000 % 10 > 4 || n / 1000 % 10 == 0 || n / 10000 % 10 == 1) "тысяч" + space else "тысячи" + space
+    val thousand = when {
+        (n / 1000 % 10 == 1 && n / 10000 % 10 != 1) -> "тысяча" + space
+        (n / 1000 % 10 > 4 || n / 1000 % 10 == 0 || n / 10000 % 10 == 1) -> "тысяч" + space
+        else -> "тысячи" + space
     }
     val hundreds = if (n / 100 % 10 != 0) c[n / 100 % 10] + space else ""
-    //ответ
+    //ответ для чисел разной длинны. От шести до одной цифры.
     if (count == 6) rus = c[n / 100000] + space + NotInfirstTen1 + thousand + hundreds + NotInfirstTen2
     if (count == 5) rus = NotInfirstTen1 + thousand + hundreds + NotInfirstTen2
     if (count == 4) rus = exceptions + thousand + hundreds + NotInfirstTen2

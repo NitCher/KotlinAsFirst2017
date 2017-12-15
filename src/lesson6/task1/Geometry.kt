@@ -84,8 +84,8 @@ data class Circle(val center: Point, val radius: Double) {
      *
      * Вернуть true, если и только если окружность содержит данную точку НА себе или ВНУТРИ себя
      */
-    fun contains(p: Point): Boolean = if ( sqr(p.x - center.x) + sqr(p.y - center.y) <= sqr(radius)) true
-    else false
+    fun contains(p: Point): Boolean = ( sqr(p.x - center.x) + sqr(p.y - center.y) <= sqr(radius))
+
 }
 
 /**
@@ -186,7 +186,8 @@ fun lineByPoints(a: Point, b: Point): Line {
  *
  * Построить серединный перпендикуляр по отрезку или по двум точкам
  */
-fun bisectorByPoints(a: Point, b: Point): Line = TODO()
+fun bisectorByPoints(a: Point, b: Point): Line =
+        Line(Point((a.x + b.x) / 2, (a.y + b.y) / 2), (Math.PI / 2 + lineByPoints(a, b).angle) % Math.PI)
 
 /**
  * Средняя
